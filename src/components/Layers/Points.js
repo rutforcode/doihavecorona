@@ -6,7 +6,13 @@ export default function Points(props) {
     id: props.infected ? "infected" : "origin",
     type: "symbol",
     layout: {
-      "icon-image": "fire-station-15",
+      "icon-image": {
+        property: "Risk",
+        stops: [
+          [0, ""],
+          [1, "fire-station-15"]
+        ]
+      },
       "text-field": ["get", "title"],
       "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
       "text-offset": [0, 0.6],

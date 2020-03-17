@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import MapGL, { FlyToInterpolator } from "react-map-gl";
 import Points from "../Layers/Points";
-//import Origins from "../../layers/Origins";
+import Origins from "../Layers/Origins";
 import Loader from "../Loader";
 import Upload from "../Upload";
 import Calc from "../Calc";
-import moment from "moment";
+import Alerts from "../Alerts";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiZGVlYXllZW4iLCJhIjoiY2prdTN5Y2FzMDM4NDN3bXFpanU1czlsbSJ9.P5c7yYyqwVCc_r0ECm9A8Q";
@@ -23,6 +23,12 @@ export default function MapComponent() {
   const [loading, setLoading] = useState(true);
   const [initialData, setInitialData] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [immediate, setImmediate] = useState(null);
+  const [three, setThree] = useState(null);
+  const [twentyFour, setTwentyFour] = useState(null);
+  const [originLayer, setOriginLayer] = useState(null);
+  const [infectedLayer, setInfectedLayer] = useState(null);
+
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -41,6 +47,7 @@ export default function MapComponent() {
           type: "FeatureCollection",
           features: []
         };
+        //eslint-disable-next-line
         json.map(feature => {
           fetchedGeoJson.features.push({
             type: "Feature",
@@ -61,8 +68,16 @@ export default function MapComponent() {
       }
     })();
   }, []);
+
   useEffect(() => {
     const calc = Calc(userData, initialData);
+    if (calc) {
+      setOriginLayer(calc.newOriginJson);
+      setInfectedLayer(calc.newInfectedJson);
+      setImmediate(calc.immediate);
+      setThree(calc.three);
+      setTwentyFour(calc.twentyFour);
+    }
   }, [userData]); // eslint-disable-line
 
   const flyTo = ({ longitude, latitude, zoom }) => {
@@ -88,7 +103,20 @@ export default function MapComponent() {
     >
       {loading && <Loader error={error} loading={loading} />}
       {!loading && <Upload setUserData={setUserData} />}
-      <Points data={initialData} flyTo={flyTo} />
+      {!infectedLayer ? (
+        <Points data={initialData} flyTo={flyTo} />
+      ) : (
+        <>
+          <Origins origin data={originLayer} flyTo={flyTo} />
+          <Points infected data={infectedLayer} flyTo={flyTo} />
+        </>
+      )}
+      <Alerts
+        immediate={immediate}
+        three={three}
+        twentyFour={twentyFour}
+        flyTo={flyTo}
+      />
     </MapGL>
   );
 }

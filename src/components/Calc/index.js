@@ -8,26 +8,6 @@ function arePointsNear(checkPoint, centerPoint, km) {
   return Math.sqrt(dx * dx + dy * dy) <= km;
 }
 
-function calcCrow(lat1, lon1, lat2, lon2) {
-  var R = 6371; // km
-  var dLat = toRad(lat2 - lat1);
-  var dLon = toRad(lon2 - lon1);
-  lat1 = toRad(lat1);
-  lat2 = toRad(lat2);
-
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c;
-  return d;
-}
-
-// Converts numeric degrees to radians
-function toRad(Value) {
-  return (Value * Math.PI) / 180;
-}
-
 export default function Calc(userData, initialData) {
   if (userData) {
     let recentLocations = userData.locations.filter(
@@ -113,7 +93,6 @@ export default function Calc(userData, initialData) {
           } else {
             comparePoint.risk = 0;
           }
-          console.log(comparePoint.risk);
           infectedPoints.push({
             compare: comparePoint,
             origin: centerPoint
@@ -160,6 +139,7 @@ export default function Calc(userData, initialData) {
             ]
           },
           properties: {
+            id: something.origin.properties.id,
             Time: something.origin.properties.fromTime,
             toTime: something.origin.properties.toTime,
             Risk: something.compare.risk
@@ -169,23 +149,7 @@ export default function Calc(userData, initialData) {
       immediate = infectedPoints.filter(item => item.compare.risk === 1);
       three = infectedPoints.filter(item => item.compare.risk === 3);
       twentyFour = infectedPoints.filter(item => item.compare.risk === 24);
-      /*if (immediate.length > 0) {
-        setImmediate(immediate);
-      }
-      if (three.length > 0) {
-        setThree(three);
-      }
-      if (twentyFour.length > 0) {
-        setTwentyFour(twentyFour);
-      }
-      console.log(three);*/
     }
     return { immediate, three, twentyFour, newInfectedJson, newOriginJson };
-
-    //console.log(newOriginJson);
-    //console.log(newInfectedJson);
-    /*setOriginLayer(newOriginJson);
-    //setOriginLayer(newGeoJson);
-    setInfectedLayer(newInfectedJson);*/
   }
 }

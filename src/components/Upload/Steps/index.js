@@ -29,7 +29,6 @@ export default function Steps(props) {
     setLoading(true);
     function handleFile(f) {
       jszip.loadAsync(f).then(function(zip) {
-        var dateAfter = new Date();
         zip.forEach(function(relativePath, zipEntry) {
           if (
             zipEntry.name ===
@@ -50,7 +49,7 @@ export default function Steps(props) {
     acceptedFiles.forEach(file => {
       handleFile(file);
     });
-  }, []);
+  }, []); // eslint-disable-line
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <div style={{ textAlign: "center" }}>
@@ -129,9 +128,8 @@ export default function Steps(props) {
                 </div>
                 <img
                   src={step4}
-                  style={{ width: "90%" }}
                   alt="step"
-                  style={{ marginBottom: "32px" }}
+                  style={{ marginBottom: "32px", width: "90%" }}
                 />
               </div>
             )}
