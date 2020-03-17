@@ -6,6 +6,7 @@ import Loader from "../Loader";
 import Upload from "../Upload";
 import Calc from "../Calc";
 import Alerts from "../Alerts";
+import EmptyModal from "../Upload/EmptyModal";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiZGVlYXllZW4iLCJhIjoiY2prdTN5Y2FzMDM4NDN3bXFpanU1czlsbSJ9.P5c7yYyqwVCc_r0ECm9A8Q";
@@ -15,6 +16,7 @@ export default function MapComponent() {
   const [viewport, setViewport] = useState({
     latitude: 32.068,
     longitude: 34.8089,
+    minZoom: 6,
     zoom: 8,
     pitch: 0,
     bearing: 0
@@ -28,9 +30,9 @@ export default function MapComponent() {
   const [twentyFour, setTwentyFour] = useState(null);
   const [originLayer, setOriginLayer] = useState(null);
   const [infectedLayer, setInfectedLayer] = useState(null);
+  const [modalState, setModalState] = useState(true);
 
   const mapRef = useRef(null);
-
   useEffect(() => {
     (async function() {
       /*const map = mapRef.current.getMap();
@@ -56,7 +58,8 @@ export default function MapComponent() {
               coordinates: [feature.lon, feature.lat]
             },
             properties: {
-              ...feature
+              ...feature,
+              Risk: 1
             }
           });
         });
@@ -117,6 +120,9 @@ export default function MapComponent() {
         twentyFour={twentyFour}
         flyTo={flyTo}
       />
+      {userData && userData.locations.length === 0 ? (
+        <EmptyModal empty open={modalState} onClose={setModalState} />
+      ) : null}
     </MapGL>
   );
 }

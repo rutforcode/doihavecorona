@@ -37,6 +37,18 @@ export default function Alerts(props) {
         height: "100vh"
       }}
     >
+      {uniqueImmediate || uniqueThree || uniqueTwentyFour ? (
+        <div
+          style={{
+            color: "white",
+            textAlign: "center",
+            opacity: 0.8,
+            marginBottom: "8px"
+          }}
+        >
+          Click on a card to view on map
+        </div>
+      ) : null}
       {uniqueImmediate &&
         uniqueImmediate.map(item => (
           <Card
