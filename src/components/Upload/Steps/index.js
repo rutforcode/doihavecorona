@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from "react";
-import step1 from "./step1.jpeg";
-import step2 from "./step2.jpeg";
-import step3 from "./step3.jpeg";
-import step4 from "./step4.jpeg";
+import step1 from "./step1.png";
+import step2 from "./step2.png";
+import step3 from "./step3.png";
 import googleIcon from "./googleIcon.png";
 import { Button } from "@material-ui/core";
 import jszip from "jszip";
@@ -115,7 +114,6 @@ export default function Steps(props) {
                 </div>
                 <img src={step1} style={{ width: "90%" }} alt="step" />
                 <img src={step2} style={{ width: "90%" }} alt="step" />
-                <img src={step3} style={{ width: "90%" }} alt="step" />
                 <div
                   style={{
                     color: "red",
@@ -127,7 +125,7 @@ export default function Steps(props) {
                   minutes:
                 </div>
                 <img
-                  src={step4}
+                  src={step3}
                   alt="step"
                   style={{ marginBottom: "32px", width: "90%" }}
                 />
