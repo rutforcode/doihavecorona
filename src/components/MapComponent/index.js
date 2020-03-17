@@ -123,6 +123,9 @@ export default function MapComponent() {
       {userData && userData.locations.length === 0 ? (
         <EmptyModal empty open={modalState} onClose={setModalState} />
       ) : null}
+      {infectedLayer && infectedLayer.features.length === 0 ? (
+        <EmptyModal noInfected open={modalState} onClose={setModalState} />
+      ) : null}
     </MapGL>
   );
 }

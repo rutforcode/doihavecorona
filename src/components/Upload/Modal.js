@@ -20,6 +20,7 @@ export default function Modal(props) {
           transform: "translate(-50%, -50%)",
           width: "900px",
           maxHeight: "95vh",
+          maxWidth: "90vw",
           paddingTop: "40px",
           paddingBottom: "40px",
           paddingLeft: "24px",

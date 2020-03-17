@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
 
 ReactModal.setAppElement("#root");
@@ -18,6 +18,7 @@ export default function Modal(props) {
           transform: "translate(-50%, -50%)",
           width: "900px",
           maxHeight: "95vh",
+          maxWidth: "95vw",
           paddingTop: "40px",
           paddingBottom: "40px",
           paddingLeft: "24px",
@@ -33,9 +34,23 @@ export default function Modal(props) {
       contentLabel="modal"
     >
       <div style={{ fontWeight: "bold", fontSize: "32px" }}>
-        {props.empty
-          ? "You have no location data. Have you given Google permission to track your location?"
-          : null}
+        {props.empty ? (
+          <div>
+            <div>You have no location data.</div>{" "}
+            <a
+              href="https://google.com/maps/timeline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Have you given Google permission to track your location?
+            </a>
+          </div>
+        ) : props.noInfected ? (
+          <div>
+            According to your location history, you have not been in a 100 meter
+            radius of an infected Corona patient.
+          </div>
+        ) : null}
       </div>
     </ReactModal>
   );

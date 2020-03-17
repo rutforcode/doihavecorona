@@ -9,7 +9,6 @@ export default function Origins(props) {
     (v, i, a) => a.findIndex(t => t.properties.id === v.properties.id) === i
   );
   props.data.features = uniqueFeatures;
-  console.log(props.data);
 
   const dataLayer = {
     id: props.infected ? "infected" : "origin",
