@@ -1,6 +1,9 @@
 import React from "react";
 import { Source, Layer } from "react-map-gl";
 
+const metersToPixelsAtMaxZoom = (meters, latitude) =>
+  meters / 0.075 / Math.cos((latitude * Math.PI) / 180);
+
 export default function Points(props) {
   const dataLayer = {
     id: props.infected ? "infected" : "origin",
@@ -21,9 +24,27 @@ export default function Points(props) {
     }
   };
 
+  const dataLayer2 = {
+    id: props.infected ? "infected33" : "origin33",
+    type: "circle",
+    paint: {
+      "circle-radius": {
+        base: 1.75,
+        stops: [
+          [0, 0],
+          [20, metersToPixelsAtMaxZoom(100, 31)]
+        ]
+      },
+      "circle-color": "#ff0000",
+      "circle-opacity": 0.5
+    }
+  };
+
+  const myLayer = props.infected ? dataLayer : dataLayer2;
+
   return (
     <Source data={props.data} type="geojson">
-      <Layer {...dataLayer} />
+      <Layer {...myLayer} />
     </Source>
   );
 }
