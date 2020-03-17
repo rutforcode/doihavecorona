@@ -58,17 +58,43 @@ export default function Calc(userData, initialData) {
           const threeHours = 1.08e7;
 
           var min24Time =
-            moment(centerPoint.properties.t_start).format("x") -
-            twentyFourHours;
+            parseInt(
+              moment(centerPoint.properties.t_start)
+                .add(2, "hours")
+                .format("x")
+            ) - twentyFourHours;
           var max24Time =
-            moment(centerPoint.properties.t_end).format("x") + twentyFourHours;
+            parseInt(
+              moment(centerPoint.properties.t_end)
+                .add(2, "hours")
+                .format("x")
+            ) + twentyFourHours;
           var min3Time =
-            moment(centerPoint.properties.t_start).format("x") - threeHours;
+            parseInt(
+              moment(centerPoint.properties.t_start)
+                .add(2, "hours")
+                .format("x")
+            ) - threeHours;
           var max3Time =
-            moment(centerPoint.properties.t_end).format("x") + threeHours;
-          var minTime = moment(centerPoint.properties.t_start).format("x");
-          var maxTime = moment(centerPoint.properties.t_end).format("x");
-
+            parseInt(
+              moment(centerPoint.properties.t_end)
+                .add(2, "hours")
+                .format("x")
+            ) + threeHours;
+          var minTime = parseInt(
+            parseInt(
+              moment(centerPoint.properties.t_start)
+                .add(2, "hours")
+                .format("x")
+            )
+          );
+          var maxTime = parseInt(
+            parseInt(
+              moment(centerPoint.properties.t_end)
+                .add(2, "hours")
+                .format("x")
+            )
+          );
           if (
             comparePoint.timestampMs >= minTime &&
             comparePoint.timestampMs <= maxTime
@@ -87,6 +113,7 @@ export default function Calc(userData, initialData) {
           } else {
             comparePoint.risk = 0;
           }
+          console.log(comparePoint.risk);
           infectedPoints.push({
             compare: comparePoint,
             origin: centerPoint
