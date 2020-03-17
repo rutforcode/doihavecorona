@@ -50,7 +50,7 @@ export default function Modal(props) {
       />
       <div>
         <h1 style={{ padding: 0, margin: 0 }}>
-          Do I have Corona?{" "}
+          Do I Have Corona?{" "}
           <span role="img" aria-label="detective">
             🕵️‍♂️
           </span>
