@@ -121,10 +121,18 @@ export default function MapComponent() {
         flyTo={flyTo}
       />
       {userData && userData.locations.length === 0 ? (
-        <EmptyModal empty open={modalState} onClose={setModalState} />
+        <EmptyModal
+          empty
+          open={modalState}
+          onClose={() => setModalState(false)}
+        />
       ) : null}
       {infectedLayer && infectedLayer.features.length === 0 ? (
-        <EmptyModal noInfected open={modalState} onClose={setModalState} />
+        <EmptyModal
+          noInfected
+          open={modalState}
+          onClose={() => setModalState(false)}
+        />
       ) : null}
     </MapGL>
   );

@@ -57,8 +57,8 @@ export default function Steps(props) {
         <div>
           <div>
             <div style={{ marginTop: "32px", fontWeight: "bold" }}>
-              Step 1: Click the button below to export your location history
-              data from Google Takeout
+              Click the button below to export your location history data from
+              Google Takeout
             </div>
             <div
               style={{

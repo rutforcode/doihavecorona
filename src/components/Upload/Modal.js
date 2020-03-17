@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactModal from "react-modal";
 import Steps from "./Steps";
+import close from "./close.svg";
 
 ReactModal.setAppElement("#root");
 
@@ -35,6 +36,18 @@ export default function Modal(props) {
       }}
       contentLabel="modal"
     >
+      <img
+        src={close}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          width: "20px",
+          cursor: "pointer"
+        }}
+        alt="close"
+        onClick={() => props.onClose()}
+      />
       <div>
         <h1 style={{ padding: 0, margin: 0 }}>
           Do I have Corona?{" "}
