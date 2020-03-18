@@ -12,6 +12,7 @@ ReactGA.initialize(trackingId);
 
 browserHistory.listen((location, action) => {
   ReactGA.pageview(location.pathname + location.search);
+  window.analytics.page("Home");
 });
 
 function App() {
