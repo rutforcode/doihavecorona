@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import MapComponent from "./components/MapComponent";
 import ReactGA from "react-ga";
 
-const trackingId = process.env.REACT_APP_GA; // Replace with your Google Analytics tracking ID
-ReactGA.initialize(trackingId);
+const trackingId = process.env.REACT_APP_GA;
 
 function App() {
+  useEffect(() => {
+    ReactGA.initialize(trackingId);
+  }, []);
   return <MapComponent />;
 }
 
