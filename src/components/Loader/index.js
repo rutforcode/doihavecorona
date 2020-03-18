@@ -22,12 +22,16 @@ export default function Loader(props) {
         padding: "20px"
       }}
     >
-      <Lottie options={defaultOptions} height={200} width={200} />
+      {props.error ? (
+        "RELOAD PAGE"
+      ) : (
+        <Lottie options={defaultOptions} height={200} width={200} />
+      )}
       <h3 style={{ margin: 0, padding: 0 }}>
         {props.error ? (
           <div>
-            ERROR - <a href="https://doihavecorona.netlify.com">CLICK HERE</a>{" "}
-            TO FIX THIS ISSUE
+            ERROR - <a href="https://www.doihavecorona.app">CLICK HERE</a> TO
+            FIX THIS ISSUE
           </div>
         ) : (
           "Fetching data from the Ministry of Health"

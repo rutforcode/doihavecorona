@@ -8,8 +8,7 @@ import Calc from "../Calc";
 import Alerts from "../Alerts";
 import EmptyModal from "../Upload/EmptyModal";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiZGVlYXllZW4iLCJhIjoiY2prdTN5Y2FzMDM4NDN3bXFpanU1czlsbSJ9.P5c7yYyqwVCc_r0ECm9A8Q";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX;
 const sleep = m => new Promise(r => setTimeout(r, m));
 
 export default function MapComponent() {
