@@ -79,6 +79,10 @@ export default function Modal(props) {
           onClose={props.onClose}
           setUserData={props.setUserData}
         />
+        <div style={{ marginTop: "16px" }}>
+          For more information contact{" "}
+          <span style={{ fontWeight: "bold" }}>dee.aye.en@gmail.com</span>
+        </div>
       </div>
     </ReactModal>
   );
