@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.blinking {
+  animation: blinkingText 0.8s infinite;
+}
+@keyframes blinkingText {
+  0% {
+    color: white;
+  }
+  49% {
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  99% {
+    color: white;
+  }
+  100% {
+    color: white;
+  }
+}
